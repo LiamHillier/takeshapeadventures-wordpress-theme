@@ -7,6 +7,7 @@
 
 	<?php wp_head(); ?>
 </head>
+<?php get_header(); ?>
 <body class="antialiased">
 	<div class="md:flex min-h-screen">
 		<div class="w-full md:w-1/2 flex items-center justify-center">
@@ -21,4 +22,5 @@
 		</div>
 	</div>
 </body>
+<?php get_footer(); ?>
 </html>
