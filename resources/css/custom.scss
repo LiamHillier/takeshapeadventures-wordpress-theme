@@ -447,9 +447,33 @@ footer {
         @apply h-full overflow-hidden relative flex items-end px-10 pb-10;
         .featured-image {
             @apply absolute top-0 left-0 h-full w-full object-cover object-center z-0;
+            img {
+                @apply h-full w-full object-cover object-center;
+            }
         }
         .hero-overlay {
             @apply bg-gradient-to-t from-neutral-900 via-transparent to-transparent h-full w-full  absolute top-0 left-0 z-0;
+        }
+    }
+    .location-brochure-container {
+        @apply flex justify-center items-center bg-gray-100 rounded-xl px-4 py-4 flex-col mt-10;
+        img {
+            @apply w-24 rounded-xl shadow-lg -mt-12;
+        }
+        input {
+            @apply rounded-full w-full !p-3 text-xs !my-0;
+        }
+        .button {
+            @apply bg-primary text-white !px-6 !py-4 lowercase font-semibold w-full;
+        }
+        .gform_wrapper {
+            @apply !my-0 w-full;
+        }
+    }
+    .overview-img {
+        @apply w-full h-full rounded-xl overflow-hidden;
+        img {
+            @apply h-full w-full object-cover object-center;
         }
     }
     .location-carousel {

@@ -6,7 +6,9 @@ $featured_img = get_field('featured_image', $location);
 $grade =  get_field('grade', $location);
 $distance =  get_field('distance', $location);
 $days =  get_field('days', $location);
-
+$brochure = get_field('brochure', $location);
+$form_id = get_field('form_id', $location);
+$brochure_img = get_field('brochure_image', $location);
 $gallery = get_field('gallery', $location);
 
 $image_one =  get_field('image_one', $location);
@@ -99,13 +101,21 @@ $query = new WP_Query($args = array(
         <a href="#dates" class="button secondary !mt-4 md:mt-0 text-center">View Dates</a>
 
     </div>
-    <div class="px py-16 grid grid-cols-1 lg:grid-cols-2 gap-16" id="tour-overview">
-        <div class="py-4">
+    <div class="px py-16 grid grid-cols-1 lg:grid-cols-5 gap-16" id="tour-overview">
+        <div class="py-4 lg:col-span-3">
             <h2 class="font-bold">Tour Overview</h2>
             <p class="mt-6"><?php echo term_description(); ?></p>
         </div>
-        <div class="h-full w-full relative rounded-lg overflow-hidden hidden lg:block min-h-500px">
-            <img src="<?php echo $image_one['url'] ?>" alt="<?php echo the_title(); ?> hiking tour with take shape adventures" width="600" height="600" class="h-full w-full !object-center object-cover absolute top-0 left-0" />
+        <div class="h-full w-full relative rounded-lg min-h-500px lg:col-span-2">
+            <?php if ($brochure == 1  && isset($brochure_img['url']) && isset($form_id)) : ?>
+                <div class="location-brochure-container">
+                    <img src="<?php echo $brochure_img['url']; ?>" alt="<?php echo the_title();?> trip brochure" width="150px" height="250px" class="rounded-lg shadow object-cover object-center"/>
+                    <h4 class="font-semibold text-center mt-4 text-md">Download our <?php echo the_title(); ?> brochure with everything you need to know about this adventure.</h4>
+                    <?php echo do_shortcode("[gravityforms id='$form_id' title='false' description='false']");?>
+                </div>
+            <?php else : ?>
+                <img src="<?php echo $image_one['url'] ?>" alt="<?php echo the_title(); ?> hiking tour with take shape adventures" width="600" height="600" class="overview-img h-full w-full !object-center object-cover absolute top-0 left-0" />
+            <?php endif; ?>
         </div>
     </div>
     <?php
@@ -231,13 +241,13 @@ $query = new WP_Query($args = array(
         </div>
         <?php if ($type === 'Adventure Tour' || $type === "Micro Adventure") : ?>
             <p class="max-w-5xl mx-auto text-sm mt-4 font-semibold">Secure your spot with a non refundable deposit, and have the remainder payment be automatically split over additional payments. Proceed with booking to choose your payment option. See here for our payment plan details terms and conditions.</p>
-        <?php endif; 
-        
-        if ( current_user_can( 'manage_options' ) ) {
+        <?php endif;
+
+        if (current_user_can('manage_options')) {
             echo do_shortcode('[custom-plugin-button]');
         }
         ?>
-        
+
     </div>
     <?php get_template_part('components/elements/become-a-member-banner'); ?>
     <?php get_template_part('components/elements/upcoming-events'); ?>
