@@ -36,11 +36,16 @@ if ($query->have_posts()) {
 			break;
 		}
 		$countries =  get_the_terms(get_the_ID(), 'country');
-		foreach ($countries as $countryS) {
-			$country_id = $countryS->term_id;
-			$country = $countryS->name;
-			break;
+		if (isset($countries) && is_array($countries)) {
+			foreach ($countries as $countryS) {
+				$country_id = $countryS->term_id;
+				$country = $countryS->name;
+				break;
+			}
+		} else {
+			$country = 'Australia';
 		}
+
 		$product = wc_get_product(get_the_ID());
 		$stock = $product->get_stock_quantity();
 		$locations = wp_get_post_terms(get_the_ID(), 'location');
@@ -59,7 +64,7 @@ if ($query->have_posts()) {
 				<p class=" mt-1">Start: <?php echo date("F j, Y g:i a", strtotime(get_field('event_start'))); ?></p>
 				<p class="mb-1">End: <?php echo date("F j, Y g:i a", strtotime(get_field('event_end'))); ?></p>
 				<p class=" mb-1">Grade: <?php the_field('grade_level'); ?></p>
-				
+
 				<p class="font-semibold mb-4">Price: $<?php echo $product->get_price(); ?></p>
 				<?php if (strlen(trim($location_link)) > 0) {
 				?>

@@ -28,7 +28,7 @@ ol {
     @apply !rounded-full !px-6 !py-4 uppercase;
 }
 .button.alt {
-    @apply !bg-transparent !text-white !border-white !border-2;
+    @apply bg-transparent text-white border-white border-2;
 }
 .button.primary {
     @apply !bg-primary !text-white;
@@ -193,7 +193,7 @@ footer {
     }
 }
 /* CALENDAR */
-#search-filter-results-1206 {
+#search-filter-results-9804 {
     @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-6;
 }
 /* EVENT CARD */
@@ -550,5 +550,25 @@ footer {
 #upcoming {
     .search-filter-results {
         @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4;
+    }
+}
+
+.woocommerce img, .woocommerce-page img  {
+    width: 100%;
+}
+
+.button.alt.checkout-button {
+    background-color: rgb(0 149 135 / 1) !important;
+}
+
+.mobile-menu-container {
+    ul {
+        @apply h-screen overflow-y-auto;
+        li {
+            @apply py-4 bg-gray-50 px-10 border-b;
+            a {
+                @apply w-full h-full block;
+            }
+        }
     }
 }

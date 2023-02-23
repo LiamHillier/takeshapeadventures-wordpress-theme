@@ -1,7 +1,7 @@
 <?php
 get_header();
 $location = get_queried_object();
-$featured_img = get_field('location_featured_image', $location);
+$featured_img = get_field('featured_image', $location);
 
 $grade =  get_field('grade', $location);
 $distance =  get_field('distance', $location);
@@ -104,8 +104,8 @@ $query = new WP_Query($args = array(
             <h2 class="font-bold">Tour Overview</h2>
             <p class="mt-6"><?php echo term_description(); ?></p>
         </div>
-        <div class="h-full w-full relative  rounded-lg overflow-hidden hidden lg:block min-h-500px">
-            <img src="<?php echo $image_one['url'] ?>" alt="<?php echo the_title(); ?> hiking tour with take shape adventures" width="600" height="600" class="!h-full !w-full !object-center object-cover absolute top-0 left-0" />
+        <div class="h-full w-full relative rounded-lg overflow-hidden hidden lg:block min-h-500px">
+            <img src="<?php echo $image_one['url'] ?>" alt="<?php echo the_title(); ?> hiking tour with take shape adventures" width="600" height="600" class="h-full w-full !object-center object-cover absolute top-0 left-0" />
         </div>
     </div>
     <?php
@@ -231,7 +231,13 @@ $query = new WP_Query($args = array(
         </div>
         <?php if ($type === 'Adventure Tour' || $type === "Micro Adventure") : ?>
             <p class="max-w-5xl mx-auto text-sm mt-4 font-semibold">Secure your spot with a non refundable deposit, and have the remainder payment be automatically split over additional payments. Proceed with booking to choose your payment option. See here for our payment plan details terms and conditions.</p>
-        <?php endif; ?>
+        <?php endif; 
+        
+        if ( current_user_can( 'manage_options' ) ) {
+            echo do_shortcode('[custom-plugin-button]');
+        }
+        ?>
+        
     </div>
     <?php get_template_part('components/elements/become-a-member-banner'); ?>
     <?php get_template_part('components/elements/upcoming-events'); ?>

@@ -220,7 +220,7 @@
         <nav class="block">
             <ul>
                 <li class="ta-dropdown-subtitle">Your Account</li>
-                <li><a href="/wp-login.php">Login / Logout</a></li>
+                <li><a href="/my-account/">Login / Logout</a></li>
                 <li><a href="/my-account/">Dashboard</a></li>
                 <li><a href="/my-account/">Your Orders</a></li>
                 <li><a href="/my-account/">Downloads</a></li>

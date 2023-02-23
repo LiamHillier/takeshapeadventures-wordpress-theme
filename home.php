@@ -6,7 +6,7 @@ get_header();
 <div class="home">
     <!-- Hero -->
     <div class="relative flex justify-center items-centerpx">
-        <img src="/wp-content/uploads/2022/12/whitesunday_tour_take_shape_adventures-11-1.jpg" alt="take shape adventures hiking adventures" width="1980" height="1280" class="full-image" />
+        <img src="https://takeshapeadventures.com.au/wp-content/uploads/2022/03/whitesunday_tour_take_shape_adventures-11.jpg" alt="take shape adventures hiking adventures" width="1980" height="1280" class="full-image" />
         <div class="overlay"></div>
         <!-- hero content -->
         <div class="max-w-5xl mx-auto text-center relative z-10 py-64 px">
@@ -33,7 +33,7 @@ get_header();
     <!-- 50 / 50 Image & Text -->
     <div class="md:flex">
         <div class="relative w-full md:w-6/12 min-h-[540px] md:min-h-fit">
-            <img src="/wp-content/uploads/2022/12/take-shape-adventures1-768x512.jpg.webp" alt="helping hand while hiking on trail" width="1000" height="700" class="full-image" />
+            <img src="https://takeshapeadventures.com.au/wp-content/uploads/2022/02/take-shape-adventures1-1024x683.jpg.webp" alt="helping hand while hiking on trail" width="1000" height="700" class="full-image" />
         </div>
         <div class="w-full md:w-6/12 bg-secondary px py-20 flex flex-col items-center justify-center gap-6 text-white text-center">
             <h2>All you need to get started!</h2>
@@ -54,7 +54,7 @@ get_header();
             <a href="https://www.facebook.com/groups/629685937200599" target="_blank" class="button alt md:mt-4">Join Us</a>
         </div>
         <div class="relative w-full md:w-6/12 min-h-[540px] md:min-h-fit">
-            <img src="/wp-content/uploads/2022/12/weekendescape_wilsonsprom-_bigdrift_group11.jpg" alt="helping hand while hiking on trail" width="1000" height="700" class="full-image" />
+            <img src="https://takeshapeadventures.com.au/wp-content/uploads/2022/03/unnamed.jpeg.webp" alt="helping hand while hiking on trail" width="1000" height="700" class="full-image" />
         </div>
     </div>
     <!-- Adventure Types -->
@@ -62,7 +62,7 @@ get_header();
     <?php get_template_part('components/elements/become-a-member-banner'); ?>
     <div class="md:flex">
         <div class="relative w-full md:w-6/12 min-h-[540px] md:min-h-fit">
-            <img src="/wp-content/uploads/2022/12/take-shape-adventures1-768x512.jpg.webp" alt="helping hand while hiking on trail" width="1000" height="700" class="full-image" />
+            <img src="https://takeshapeadventures.com.au/wp-content/uploads/2021/11/privatecorporate.jpg.webp" alt="helping hand while hiking on trail" width="1000" height="700" class="full-image" />
         </div>
         <div class="w-full md:w-6/12 bg-amber-500 px py-32 flex flex-col items-center justify-center gap-6 text-white text-center">
             <h2>Hiking Tips, insights and amazing stories</h2>

@@ -199,4 +199,13 @@ jQuery(document).ready(function ($) {
             // instead of a settings object
         ],
     });
+
+
+    $('.mobile-header-btn').on('click', function(e) {
+        $('.mobile-menu').removeClass('hidden');
+    })
+    $('.close-menu').on('click', function(e) {
+        $('.mobile-menu').addClass('hidden');
+    })
+
 });
