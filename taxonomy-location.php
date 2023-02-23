@@ -2,7 +2,6 @@
 get_header();
 $location = get_queried_object();
 $featured_img = get_field('featured_image', $location);
-
 $grade =  get_field('grade', $location);
 $distance =  get_field('distance', $location);
 $days =  get_field('days', $location);
@@ -10,9 +9,7 @@ $brochure = get_field('brochure', $location);
 $form_id = get_field('form_id', $location);
 $brochure_img = get_field('brochure_image', $location);
 $gallery = get_field('gallery', $location);
-
 $image_one =  get_field('image_one', $location);
-
 $type =  get_field('type', $location);
 // get_field('highlights', $location) 
 $highlights = get_field('highlights', $location);
@@ -26,14 +23,10 @@ if ($video_testimonial) {
     $testimonial_videos = get_field('testimonial_videos', $location);
 }
 $testimonial_text = get_field('testimonial_text', $location);
-
 $itinerary = get_field('itinerary', $location);
-
 $taxonomy = 'location'; // The targeted custom taxonomy
-
 // Get the terms IDs for the current product related to 'collane' custom taxonomy
 $term_ids = wp_get_post_terms(get_the_id(), $taxonomy, array('fields' => 'ids')); // array
-
 $query = new WP_Query($args = array(
     'post_type'             => 'product',
     'post_status'           => 'publish',
@@ -54,8 +47,6 @@ $query = new WP_Query($args = array(
         'terms'         => $term_ids,
     ),),
 ));
-
-
 ?>
 <div>
     <div class="location-hero">
@@ -80,7 +71,6 @@ $query = new WP_Query($args = array(
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                 </svg>
-
                 <div class="font-bold">
                     <h4>Grade</h4>
                     <p><?php echo $grade ?></p>
@@ -91,7 +81,6 @@ $query = new WP_Query($args = array(
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
-
                 <div class="font-bold">
                     <h4>Distance</h4>
                     <p><?php echo $distance ?>km</p>
@@ -99,7 +88,6 @@ $query = new WP_Query($args = array(
             </div>
         </div>
         <a href="#dates" class="button secondary !mt-4 md:mt-0 text-center">View Dates</a>
-
     </div>
     <div class="px py-16 grid grid-cols-1 lg:grid-cols-5 gap-16" id="tour-overview">
         <div class="py-4 lg:col-span-3">
@@ -109,9 +97,9 @@ $query = new WP_Query($args = array(
         <div class="h-full w-full relative rounded-lg min-h-500px lg:col-span-2">
             <?php if ($brochure == 1  && isset($brochure_img['url']) && isset($form_id)) : ?>
                 <div class="location-brochure-container">
-                    <img src="<?php echo $brochure_img['url']; ?>" alt="<?php echo the_title();?> trip brochure" width="150px" height="250px" class="rounded-lg shadow object-cover object-center"/>
+                    <img src="<?php echo $brochure_img['url']; ?>" alt="<?php echo the_title(); ?> trip brochure" width="150px" height="250px" class="rounded-lg shadow object-cover object-center" />
                     <h4 class="font-semibold text-center mt-4 text-md">Download our <?php echo the_title(); ?> brochure with everything you need to know about this adventure.</h4>
-                    <?php echo do_shortcode("[gravityforms id='$form_id' title='false' description='false']");?>
+                    <?php echo do_shortcode("[gravityforms id='$form_id' title='false' description='false']"); ?>
                 </div>
             <?php else : ?>
                 <img src="<?php echo $image_one['url'] ?>" alt="<?php echo the_title(); ?> hiking tour with take shape adventures" width="600" height="600" class="overview-img h-full w-full !object-center object-cover absolute top-0 left-0" />
@@ -211,7 +199,6 @@ $query = new WP_Query($args = array(
     <div class="py-16 w-full text-center max-w-7xl mx-auto" id="dates">
         <h4>BOOK NOW</h4>
         <h2>Upcoming Dates</h2>
-
         <div class="dates-carousel">
             <?php if ($query->have_posts()) :
                 while ($query->have_posts()) :
@@ -230,11 +217,38 @@ $query = new WP_Query($args = array(
                         <?php endif; ?>
                         <p class="mb-4 font-normal text-sm">Members Price: $<?php echo get_field('members_price', $location); ?></p>
                         <span class="rounded-full absolute top-2 right-2 bg-primary px-2 py-2 text-sm text-white"><?php echo $stock; ?> left</span>
-                        <?php if ($stock > 0) : ?>
+                        <?php
+                        if ($product->is_type('variable')) {
+                        ?>
+                            <?php if (empty($product->get_available_variations()) && false !== $product->get_available_variations()) : ?>
+                            <?php else : ?>
+                                <form class="variations_form cart" method="post" enctype='multipart/form-data'>
+                                    <label for="variation_select">Select a variation:</label>
+                                    <select id="variation_select" name="variation_id">
+                                        <?php
+                                        // Get the product variations
+                                        $product_variations = $product->get_available_variations();
+                                        // Loop through each variation
+                                        foreach ($product_variations as $variation) {
+                                            // Get the variation ID and attributes
+                                            $variation_id = $variation['variation_id'];
+                                            $attributes = implode(', ', $variation['attributes']);
+                                            // Display the variation as an option in the select dropdown
+                                            echo '<option value="' . $variation_id . '">' . $attributes . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    <button type="submit"class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</button>
+                                    <input type="hidden" name="add-to-cart" value="<?php echo $product->get_id(); ?>">
+                                </form>
+                            <?php endif; ?>
+                        <?php } else {
+                        ?>
                             <a href="/booking-information?add-to-cart=<?php echo $product->id; ?>&quantity=1" class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</a>
-                        <?php endif; ?>
+                        <?php
+                        }
+                        ?>
                     </div>
-
             <?php endwhile;
                 wp_reset_postdata();
             endif; ?>
@@ -242,12 +256,10 @@ $query = new WP_Query($args = array(
         <?php if ($type === 'Adventure Tour' || $type === "Micro Adventure") : ?>
             <p class="max-w-5xl mx-auto text-sm mt-4 font-semibold">Secure your spot with a non refundable deposit, and have the remainder payment be automatically split over additional payments. Proceed with booking to choose your payment option. See here for our payment plan details terms and conditions.</p>
         <?php endif;
-
         if (current_user_can('manage_options')) {
             echo do_shortcode('[custom-plugin-button]');
         }
         ?>
-
     </div>
     <?php get_template_part('components/elements/become-a-member-banner'); ?>
     <?php get_template_part('components/elements/upcoming-events'); ?>

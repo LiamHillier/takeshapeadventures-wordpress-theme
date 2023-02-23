@@ -46,6 +46,7 @@ function takeshapeadventures_enqueue_scripts()
 	wp_enqueue_style('tailpress', takeshapeadventures_asset('css/app.css'), array(), $theme->get('Version'));
 	wp_enqueue_script('tailpress', takeshapeadventures_asset('js/app.js'), array(), $theme->get('Version'));
 	wp_enqueue_script('header', takeshapeadventures_asset('resources/js/header.js'), array('jquery'));
+	wp_enqueue_script('app', takeshapeadventures_asset('resources/js/app.js'), array('jquery'));
 }
 
 add_action('wp_enqueue_scripts', 'takeshapeadventures_enqueue_scripts');
