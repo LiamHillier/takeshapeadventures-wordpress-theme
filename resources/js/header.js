@@ -132,7 +132,7 @@ jQuery(document).ready(function ($) {
     });
 
     let timeout;
-    $(".woocommerce").on("change", "input.qty", function () {
+    $(".booking-info .woocommerce").on("change", "input.qty", function () {
         if (timeout !== undefined) {
             clearTimeout(timeout);
         }

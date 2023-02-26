@@ -238,13 +238,16 @@ $query = new WP_Query($args = array(
                                         }
                                         ?>
                                     </select>
-                                    <button type="submit"class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</button>
+                                    <button type="submit" class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</button>
                                     <input type="hidden" name="add-to-cart" value="<?php echo $product->get_id(); ?>">
                                 </form>
                             <?php endif; ?>
-                        <?php } else {
-                        ?>
-                            <a href="/booking-information?add-to-cart=<?php echo $product->id; ?>&quantity=1" class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</a>
+                            <?php } else {
+                            if ($stock > 0) {
+                            ?> <a href="/booking-information?add-to-cart=<?php echo $product->id; ?>&quantity=1" class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</a> <?php
+                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                ?>
+
                         <?php
                         }
                         ?>
