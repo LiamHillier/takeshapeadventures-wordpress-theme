@@ -262,7 +262,11 @@ $query = new WP_Query($args = array(
                             <?php
                             }
                             ?>
-                        <?php } ?>
+                        <?php } else { 
+                            echo '<div class="waitlist-container">';
+                            echo do_shortcode("[woocommerce_waitlist product_id=$product->id]");
+                            echo '</div>';
+                        } ?>
                     </div>
             <?php endwhile;
                 wp_reset_postdata();
