@@ -217,40 +217,52 @@ $query = new WP_Query($args = array(
                         <?php endif; ?>
                         <p class="mb-4 font-normal text-sm">Members Price: $<?php echo get_field('members_price', $location); ?></p>
                         <span class="rounded-full absolute top-2 right-2 bg-primary px-2 py-2 text-sm text-white"><?php echo $stock; ?> left</span>
-                        <?php
-                        if ($product->is_type('variable')) {
-                        ?>
-                            <?php if (empty($product->get_available_variations()) && false !== $product->get_available_variations()) : ?>
-                            <?php else : ?>
-                                <form class="variations_form cart" method="post" enctype='multipart/form-data'>
-                                    <label for="variation_select">Select a variation:</label>
-                                    <select id="variation_select" name="variation_id">
-                                        <?php
-                                        // Get the product variations
-                                        $product_variations = $product->get_available_variations();
-                                        // Loop through each variation
-                                        foreach ($product_variations as $variation) {
-                                            // Get the variation ID and attributes
-                                            $variation_id = $variation['variation_id'];
-                                            $attributes = implode(', ', $variation['attributes']);
-                                            // Display the variation as an option in the select dropdown
-                                            echo '<option value="' . $variation_id . '">' . $attributes . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    <button type="submit" class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</button>
-                                    <input type="hidden" name="add-to-cart" value="<?php echo $product->get_id(); ?>">
-                                </form>
-                            <?php endif; ?>
-                            <?php } else {
-                            if ($stock > 0) {
-                            ?> <a href="/booking-information?add-to-cart=<?php echo $product->id; ?>&quantity=1" class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</a> <?php
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                ?>
+                        <?php if ($stock > 0) { ?>
+                            <?php
+                            if ($product->is_type('variable')) {
+                            ?>
+                                <?php if (empty($product->get_available_variations()) && false !== $product->get_available_variations()) : ?>
+                                <?php else : ?>
+                                    <form class="variations_form cart" method="post" enctype='multipart/form-data'>
+                                        <label for="variation_select">Select a variation:</label>
+                                        <select id="variation_select" name="variation_id" def=>
+                                            <?php
+                                            // Get the product variations
+                                            $product_variations = $product->get_available_variations();
+                                            // Loop through each variation
+                                            $count = 1;
+                                            foreach ($product_variations as $variation) {
 
-                        <?php
-                        }
-                        ?>
+                                                echo json_encode($variation);
+                                                // Get the variation ID and attributes
+                                                $variation_id = $variation['variation_id'];
+                                                $attributes = implode(', ', $variation['attributes']);
+                                                // Display the variation as an option in the select dropdown
+                                                if ($count < 2) {
+                                                    echo '<option selected value="' . $variation_id . '">' . $attributes . '</option>';
+                                                } else {
+                                                    echo '<option value="' . $variation_id . '">' . $attributes . '</option>';
+                                                }
+
+                                                $count++;
+                                            }
+                                            ?>
+                                        </select>
+                                        <button type="submit" class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</button>
+                                        <input type="hidden" name="add-to-cart" value="<?php echo $product->get_id(); ?>">
+                                        <input type="hidden" name="variation_id" value="<?php echo $product_variations[0]['variation_id']; ?>">
+                                    </form>
+                                <?php endif; ?>
+                                <?php } else {
+                                if ($stock > 0) {
+                                ?> <a href="/booking-information?add-to-cart=<?php echo $product->id; ?>&quantity=1" class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</a> <?php
+                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                            ?>
+
+                            <?php
+                            }
+                            ?>
+                        <?php } ?>
                     </div>
             <?php endwhile;
                 wp_reset_postdata();
