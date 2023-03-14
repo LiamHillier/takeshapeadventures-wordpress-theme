@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+    
     $(".ta-get_started").click(function () {
         if (
             $(".ta-drop-getting_invovled").hasClass(

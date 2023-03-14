@@ -1,4 +1,6 @@
 jQuery(document).ready(function($) {
+
+
     console.log('ticket variations ready')
     // When the user selects a variation from the dropdown
     $('.tax-location #variation_select').change(function() {

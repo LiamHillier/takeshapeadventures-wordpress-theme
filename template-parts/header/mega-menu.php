@@ -49,6 +49,7 @@
         <nav class="block">
             <ul>
                 <li class="ta-dropdown-subtitle"></li>
+                <li><a href="/wellness">Wellness</a></li>
                 <li><a href="/micro-adventures">Micro Adventures</a></li>
                 <li><a href="/adventure-tours">Adventure Tours</a></li>
                 <li><a href="/private-team-and-corporate-events">Corporate & Private Events</a></li>

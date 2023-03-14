@@ -15,6 +15,8 @@ $type =  get_field('type', $location);
 $highlights = get_field('highlights', $location);
 $included = get_field('includes', $location);
 $accommodation = get_field('accommodation', $location);
+$address = get_field('maps_addresss', $location);
+$add_location = get_field('additional_location_information', $location);
 $accommodation_image = get_field('accommodation_image', $location);
 $food = get_field('food', $location);
 $food_image = get_field('food_image', $location);
@@ -47,7 +49,10 @@ $query = new WP_Query($args = array(
         'terms'         => $term_ids,
     ),),
 ));
+
+
 ?>
+
 <div>
     <div class="location-hero">
         <img class="featured-image" src="<?php echo $featured_img['url'] ?>" alt="<?php echo the_title(); ?> hiking tour with take shape adventures" width="1980" height="1000" />
@@ -196,6 +201,36 @@ $query = new WP_Query($args = array(
             </div>
         </div>
     <?php endif; ?>
+    <div class="px py-16 grid grid-cols-5" id="map-container">
+        <div id="map" style="width: 100%; height: 500px" class="col-span-3 rounded-lg overflow-hidden"></div>
+        <script>
+            var geocoder = new google.maps.Geocoder();
+            var mapOptions = {
+                zoom: 8
+            };
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            geocoder.geocode({
+                'address': '<?php echo $address; ?>'
+            }, function(results, status) {
+                if (status == 'OK') {
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    var element = document.getElementById("map-container");
+                    element.classList.add("hidden");
+                }
+            });
+        </script>
+        <div class="col-span-2 px">
+            <h2 class="mb-6">Where we're going</h2>
+            <h4><?php echo $address ?></h4>
+            <p class="mt-4"><?php echo $add_location; ?></p>
+        </div>
+    </div>
     <div class="py-16 w-full text-center max-w-7xl mx-auto" id="dates">
         <h4>BOOK NOW</h4>
         <h2>Upcoming Dates</h2>
@@ -256,13 +291,13 @@ $query = new WP_Query($args = array(
                                 <?php } else {
                                 if ($stock > 0) {
                                 ?> <a href="/booking-information?add-to-cart=<?php echo $product->id; ?>&quantity=1" class="border-2 border-secondary bg-secondary rounded-xl text-white uppercase text-xs px-4 py-2 font-bold">Book now</a> <?php
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                            ?>
+                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                ?>
 
                             <?php
                             }
                             ?>
-                        <?php } else { 
+                        <?php } else {
                             echo '<div class="waitlist-container">';
                             echo do_shortcode("[woocommerce_waitlist product_id=$product->id]");
                             echo '</div>';
