@@ -912,3 +912,29 @@ function populate_posts($form)
     }
     return $form;
 }
+
+function eoi_form_shortcode($atts)
+{
+    $post = get_post();
+    $form_id = get_field('form_id',   $post->ID);
+    return do_shortcode('[gravityforms title="false" id="' . $form_id . '"]');
+}
+add_shortcode('dynamic_eoi', 'eoi_form_shortcode');
+
+function eoi_inclusions($atts)
+{
+    $html = '';
+    $post = get_post();
+    $rows = get_field('included',  $post->ID);
+    if( $rows ) {
+        $html .=  '<ul class="slides">';
+        foreach( $rows as $row ) {
+            $html .=  '<li>';
+            $html .=  wpautop( $row['inclusion'] );
+            $html .= '</li>';
+        }
+        $html .= '</ul>';
+    }
+    return $html;
+}
+add_shortcode('eoi_inclusions', 'eoi_inclusions');
