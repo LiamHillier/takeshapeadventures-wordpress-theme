@@ -1,3 +1,3 @@
 <div class="promo-bar px">
-    <a href="/overnight-hikes/">A night under the stars, what happens on our overnight hikes? - CLICK HERE</a>
+    <a href="/packages-and-gifts/">Save big and start your journey with our 3 WALKS for $239 SPECIAL</a>
 </div>
